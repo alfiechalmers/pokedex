@@ -1,0 +1,11 @@
+body {
+    background: rgb(255,255,255);
+    background: linear-gradient(123deg, rgba(255,255,255,1) 0%, rgba(216,248,255,1) 100%);
+}
+
+.pokeSearch {
+    text-align: right;
+    position: fixed;
+    top: 0;
+    right: 1%;
+}
