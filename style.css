@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 body {
+    font-family: 'Roboto', sans-serif;
     background: rgb(255,255,255);
     background: linear-gradient(123deg, rgba(255,255,255,1) 0%, rgba(216,248,255,1) 100%);
 }
@@ -8,4 +10,47 @@ body {
     position: fixed;
     top: 0;
     right: 1%;
+}
+
+.grid {
+    text-align: center;
+  }
+  
+.griditem {
+margin: 1%;
+background-color: #393e46;
+display: inline-block;
+text-align: center;
+font-size: 25px;
+border-radius: 10px;
+}
+  
+.gridimage {
+    height: 20%;
+    width: 20%;
+}
+
+
+a:link {
+color: #ffffff;
+background-color: transparent;
+text-decoration: none;
+}
+
+a:visited {
+color: #ffffff;
+background-color: transparent;
+text-decoration: none;
+}
+
+a:hover {
+color: #ffffff;
+background-color: transparent;
+text-decoration: underline;
+}
+
+a:active {
+color: #ffffff;
+background-color: transparent;
+text-decoration: underline;
 }
