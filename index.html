@@ -6,35 +6,18 @@
     <title>Pokedex</title>
 </head>
 <body>
-    <a style="color: #000000;" href="search.html">Search for pokemon</a>
     <h1>Pokedex</h1>
-
-    <div class="grid">
-        <span class="griditem">
-            <a href="#"><img id="image0" class="gridimage"></a>
-            <br />
-            <a href="#" id="name0"></a>
-        </span>
-
-        <span class="griditem">
-            <a href="#"><img id="image1" class="gridimage"></a>
-            <br />
-            <a href="#" id="name1"></a>
-        </span>
-
-        <span class="griditem">
-            <a href="#"><img id="image2" class="gridimage"></a>
-            <br />
-            <a href="#" id="name2"></a>
-        </span>
-
-        <span class="griditem">
-            <a href="#"><img id="image3" class="gridimage"></a>
-            <br />
-            <a href="#" id="name3"></a>
-        </span>
-    </div>
-
+    <button onclick="previous()" id="previous">Previous Page</button>
+    <button onclick="next()" id="next">Next Page</button>
+    <main>
+        <section>
+          <div class="container">
+            <div id="main" class="pokemon-container"></div>
+          </div>
+          <button onclick="previous()" id="previous">Previous Page</button>
+          <button onclick="next()" id="next">Next Page</button>
+        </section>
+      </main> 
+      <script src="index.js"></script> 
 </body>
-    <script src="index.js"></script>
 </html>
