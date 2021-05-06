@@ -1,5 +1,9 @@
 const pokemonDiv = document.getElementById("main");
-appendPokemon("https://pokeapi.co/api/v2/pokemon/?limit=20")
+var urlParams = new URLSearchParams(window.location.search);
+var offset = Number(urlParams.get("offset"));
+
+GetPokemon(0);
+
 function createPokemonNode(id, name, type, imageURL) {
   var div = document.createElement("div");
   div.classList.add("pokemon");
@@ -8,44 +12,50 @@ function createPokemonNode(id, name, type, imageURL) {
     <div id="${id}">
       <h1>${name} (#${id})</h1>
       <img class="img ${type}" src="${imageURL}"/>
-      <center>
-        <a class="details-btn" href="pokemon.html?id=${id}">Details</a>
-      </center>
     </div>
 `;
   return div;
 }
 
-function appendPokemon(link) {
-  pokemonDiv.innerHTML = null;
-  var pokemon = [];
-  fetch(link)
-  .then((response) => response.json())
-  .then((data) => {
-    let results = data.results;
-      results.forEach((element) => {
-      fetch(element.url)
-        .then((response) => response.json())
-        .then((data) => {
-          pokemon.push(data);
-            let id = data.id;
-            let name = data.name.charAt(0).toUpperCase() + data.name.slice(1);
-            let type = data.types[0].type.name;
-            let imageURL = data.sprites.other["official-artwork"].front_default;
-            pokemonDiv.appendChild(createPokemonNode(id, name, type, imageURL));
-        });
-    });
-  })}
+async function GetPokemon() {
+  const urls = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`
+  )
+    .then(res => res.json())
+    .then(p => p.results.map(r => r.url));
 
-let link = "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=";
-let offset = 0;
+  let promises = [];
+  urls.forEach(u =>
+    promises.push(
+      new Promise(resolve =>
+        fetch(u)
+          .then(res => res.json())
+          .then(j => resolve(j))
+      )
+    )
+  );
+
+  let pokis = await Promise.all(promises);
+
+  pokemonDiv.innerHTML = "";
+  pokis.forEach(poki => {
+    pokemonDiv.appendChild(
+      createPokemonNode(
+        poki.id,
+        poki.name.charAt(0).toUpperCase() + poki.name.slice(1),
+        poki.types[0].type.name,
+        poki.sprites.other["official-artwork"].front_default
+      )
+    );
+  });
+}
 function previous() {
   if (offset < 20) return;
-  offset = offset - 20;
-  appendPokemon(link + offset)
+  offset-=20;
+  window.location.href = `?offset=${offset}`;
 }
 function next() {
-  offset = offset + 20;
-  let newLink = link + offset;
-  appendPokemon(newLink)
+  offset+=20;
+  console.log(offset)
+  window.location.href = `?offset=${offset}`;
 }
