@@ -1,2 +1,2 @@
 # pokedex
-Honestly i wouldn't bother looking through this. its extremely inefficient and awful and mostly not written by me.
+Pretty sure this was my first time using JS on web. It's pretty shit but yknow, taught me how to teach myself
